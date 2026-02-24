@@ -1,10 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  reactCompiler: true,
-  output: "standalone", // Required for Docker deployment
-  allowedDevOrigins: ["*"],
+	/* config options here */
+	reactCompiler: true,
+	output: "standalone", // Required for Docker deployment
+	allowedDevOrigins: ["*"],
 };
 
 export default nextConfig;

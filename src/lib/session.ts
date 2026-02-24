@@ -1,6 +1,11 @@
 import "server-only";
 import { jwtVerify, SignJWT } from "jose";
 import { cookies } from "next/headers";
+import {
+  deleteSessionByToken,
+  findSessionByToken,
+  saveSession,
+} from "./dal/admins";
 
 const secret = new TextEncoder().encode(
   process.env.SESSION_SECRET || "default-secret-key-change-in-production",
@@ -43,6 +48,8 @@ export async function createSession(userId: number, username: string) {
   const expiresAt = new Date(Date.now() + SESSION_DURATION);
   const session = await encrypt({ userId, username, expiresAt });
 
+  await saveSession(userId, session, expiresAt);
+
   const cookieStore = await cookies();
   cookieStore.set(COOKIE_NAME, session, {
     httpOnly: true,
@@ -58,6 +65,9 @@ export async function verifySession(): Promise<SessionPayload | null> {
   const cookie = cookieStore.get(COOKIE_NAME)?.value;
   if (!cookie) return null;
 
+  const dbSession = await findSessionByToken(cookie);
+  if (!dbSession) return null;
+
   const session = await decrypt(cookie);
   if (!session) return null;
 
@@ -70,5 +80,6 @@ export async function verifySession(): Promise<SessionPayload | null> {
 
 export async function deleteSession() {
   const cookieStore = await cookies();
+  await deleteSessionByToken(cookieStore.get(COOKIE_NAME)?.value || "");
   cookieStore.delete(COOKIE_NAME);
 }

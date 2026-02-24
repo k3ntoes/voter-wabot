@@ -12,7 +12,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import WhatsAppQR from "@/components/WhatsAppQR";
+import WhatsAppComponent from "@/components/whatsapp/whatsapp_component";
+import { getApiUrl } from "@/lib/dal/api_url";
 import { getAll } from "@/lib/dal/voters";
 
 async function RecentVoters() {
@@ -57,13 +58,13 @@ async function RecentVoters() {
 }
 
 export default async function DashboardPage() {
+  const apiUrls = await getApiUrl();
+
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold">Dashboard</h1>
-        <p className="text-muted-foreground">
-          Voter registration system overview
-        </p>
+        <p className="text-muted-foreground">Voter registration system overview</p>
       </div>
 
       <Suspense fallback={<div>Loading statistics...</div>}>
@@ -71,8 +72,7 @@ export default async function DashboardPage() {
       </Suspense>
 
       <div className="grid gap-6 lg:grid-cols-2">
-        {/* <BotStatusPanel /> */}
-        <WhatsAppQR />
+        <WhatsAppComponent apiUrls={apiUrls} />
         <BotStatusPanel />
       </div>
 
@@ -81,9 +81,7 @@ export default async function DashboardPage() {
           <div className="flex items-center justify-between">
             <div>
               <CardTitle>Recent Registrations</CardTitle>
-              <CardDescription>
-                Latest voter registration submissions
-              </CardDescription>
+              <CardDescription>Latest voter registration submissions</CardDescription>
             </div>
             <Link href="/dashboard/voters">
               <Button variant="ghost" size="sm">

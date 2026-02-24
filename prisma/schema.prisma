@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output   = "../src/lib/prisma"
 }
 
 datasource db {
@@ -19,33 +20,19 @@ model Voter {
 }
 
 model Admin {
-  id           Int    @id @default(autoincrement())
-  username     String @unique
+  id            Int    @id @default(autoincrement())
+  username      String @unique
   password_hash String
 }
 
-model WhatsAppSession {
+model Session {
   id         Int      @id @default(autoincrement())
-  key        String   @unique
-  value      String   // JSON string
-  updated_at DateTime @default(now()) @updatedAt
+  admin_id   Int
+  token      String   @unique
+  expires_at DateTime @default(now())
 }
 
-model MessageQueue {
-  id         Int      @id @default(autoincrement())
-  phone      String
-  message    String
-  status     String   @default("pending") // pending, sent, failed
-  attempts   Int      @default(0)
-  error      String?
-  created_at DateTime @default(now())
-  sent_at    DateTime?
-}
-
-model ConnectionLog {
-  id         Int      @id @default(autoincrement())
-  status     String   // connecting, connected, disconnected, error
-  qr_code    String?
-  error      String?
-  created_at DateTime @default(now())
+model ApiUrl {
+  id  String @id
+  url String
 }
