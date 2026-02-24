@@ -1,0 +1,4 @@
+$ bun server.ts
+[bun] Warning: ws.WebSocket 'upgrade' event is not implemented in bun
+[bun] Warning: ws.WebSocket 'unexpected-response' event is not implemented in bun
+error: script "start" was terminated by signal SIGTERM (Polite quit request)

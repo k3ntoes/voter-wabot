@@ -1,0 +1,13 @@
+2026-02-24 04:13:29,839 INFO Set uid to user 1001 succeeded
+2026-02-24 04:13:29,843 INFO RPC interface 'supervisor' initialized
+2026-02-24 04:13:29,843 CRIT Server 'unix_http_server' running without any HTTP authentication checking
+2026-02-24 04:13:29,843 INFO supervisord started with pid 1
+2026-02-24 04:13:30,847 INFO spawned: 'nextjs' with pid 170
+2026-02-24 04:13:30,850 INFO spawned: 'whatsapp-service' with pid 171
+2026-02-24 04:13:30,851 INFO reaped unknown pid 41 (exit status 0)
+2026-02-24 04:13:32,146 INFO success: nextjs entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2026-02-24 04:13:32,146 INFO success: whatsapp-service entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2026-02-24 04:18:09,186 WARN received SIGTERM indicating exit request
+2026-02-24 04:18:09,187 INFO waiting for nextjs, whatsapp-service to die
+2026-02-24 04:18:09,204 WARN stopped: whatsapp-service (terminated by SIGTERM)
+2026-02-24 04:18:09,218 INFO stopped: nextjs (exit status 0)

@@ -1,0 +1,41 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: voter-wabot-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"  # Next.js
+      - "3001:3001"  # WhatsApp Service
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=file:/app/data/sqlite.db
+      - WHATSAPP_SERVICE_URL=http://localhost:3001
+      - NEXT_PUBLIC_WHATSAPP_SERVICE_URL=http://localhost:3001
+    volumes:
+      # Persist database
+      - ./data:/app/data
+      # Persist WhatsApp authentication
+      - ./auth_info:/app/auth_info
+      # Persist logs
+      - ./logs:/app/logs
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - voter-wabot-network
+
+networks:
+  voter-wabot-network:
+    driver: bridge
+
+volumes:
+  data:
+  auth_info:
+  logs:
