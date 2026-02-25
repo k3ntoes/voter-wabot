@@ -1,0 +1,19 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.biome": "explicit",
+    "source.organizeImports.biome": "explicit",
+    "source.fixAll.biome": "explicit"
+  },
+  "biome.configurationPath": "./biome.json",
+  "biome.lsp.bin": "./node_modules/.bin/biome",
+  "editor.defaultFormatter": "biomejs.biome",
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  }
+}
