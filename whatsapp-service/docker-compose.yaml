@@ -1,0 +1,12 @@
+services:
+  voter-wabot-api:
+    container_name: voter-wabot-api
+    image: voter-wabot-api:latest
+    build: .
+    environment:
+      DATABASE_URL: "file:./data/wa.db"
+      CORS_ORIGIN: "*"
+      API_TOKEN: 5viAfBWWE6MtZaZXQV3vaU2PwQlCtHhiPciaTlc8IX4=
+    ports:
+      - 3003:3001
+      - 7777:7777

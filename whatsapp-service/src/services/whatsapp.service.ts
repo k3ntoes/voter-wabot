@@ -114,7 +114,7 @@ export class WhatsAppService {
 					botState.qrCode = qr;
 					this.onStateUpdate(botState);
 					console.log("📱 QR Code generated! Scan with WhatsApp");
-					qrTerminal.generate(qr, { small: true });
+					// qrTerminal.generate(qr, { small: true });
 				}
 
 				if (connection === "close") {

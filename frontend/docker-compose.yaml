@@ -1,0 +1,18 @@
+services:
+  voter-wabot-frontend:
+    container_name: voter-wabot-frontend
+    image: voter-wabot-frontend:latest
+    build: .
+    # env_file:
+    #   - .env
+    environment:
+      DATABASE_URL: "file:./data/voter.db"
+      SESSION_SECRET: 5viAfBWWE6MtZaZXQV3vaU2PwQlCtHhiPciaTlc8IX4=
+      USERNAME: "admin"
+      PASSWORD: "admin123"
+      PUBLIC_API_TOKEN: "your_public_api_token_here"
+    entrypoint: 
+      - node
+      - server.js
+    ports:
+      - 3002:3000

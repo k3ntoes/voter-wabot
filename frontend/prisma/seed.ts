@@ -1,5 +1,5 @@
+import { PrismaClient } from "@/lib/prisma/client";
 import { PrismaLibSql } from "@prisma/adapter-libsql";
-import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 const adapter = new PrismaLibSql({
