@@ -2,6 +2,7 @@ FROM oven/bun:alpine
 
 WORKDIR /app
 COPY . .
+RUN rm -rf data/*.db
 RUN bun install --frozen-lockfile
 RUN bun run db:generate
 RUN bun run db:migrate:deploy

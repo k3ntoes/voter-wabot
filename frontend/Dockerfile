@@ -14,6 +14,7 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+RUN rm -rf data/*.db
 RUN bun run db:generate
 RUN bun run db:migrate:deploy
 RUN bun run db:seed
